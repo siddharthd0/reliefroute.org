@@ -7,6 +7,8 @@ const Footer = () => {
         <div>
         <span className="text-sm">Made with ❤️ by </span>
         <a href="mailto:siddharth@techoptimum.org" className="text-sm hover:underline">Siddharth Duggal</a>
+        <span className="text-sm"> and </span>
+        <a href="mailto:aditya@techoptimum.org" className="text-sm hover:underline">Aditya Sahasranam</a>
         </div>
         <button className="">Press Release</button>
       </div>
