@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
+import Image from "next/image";
 const ShuffleHero = () => {
   return (
     <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
@@ -14,7 +14,7 @@ const ShuffleHero = () => {
         <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
           Shelters, food and water, and other resources are needed to help people surive.
         </p>
-        <button className="bg-indigo-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-indigo-600 active:scale-95">
+        <button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap">
           Locate Resources
         </button>
       </div>
@@ -139,8 +139,8 @@ const ShuffleGrid = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
-      {squares.map((sq) => sq)}
+    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 relative"> {/* Added 'relative' */}
+      <Image className="rounded-md" src="/war.jpg" layout="fill" objectFit="cover" alt="War Image" /> {/* Modified Image component */}
     </div>
   );
 };

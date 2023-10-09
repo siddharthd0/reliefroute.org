@@ -13,7 +13,7 @@ const FlipNavWrapper = () => {
 const FlipNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-white p-4 px-28 border-b-[1px] border-gray-200 flex items-center justify-between relative">
+    <nav className="bg-white p-4 px-40 border-b-[1px] border-gray-200 flex items-center justify-between relative">
       <NavLeft setIsOpen={setIsOpen} />
       <NavRight />
       <NavMenu isOpen={isOpen} />
@@ -68,14 +68,14 @@ const NavLink = ({ text }) => {
 const NavRight = () => {
   return (
     <div className="flex items-center gap-4">
-   
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
-      >
-        Press Release
-      </motion.button>
+  <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap"
+>
+  Press Release
+</motion.button>
+
     </div>
   );
 };
