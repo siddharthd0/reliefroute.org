@@ -1,23 +1,23 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Landing from '../components/landing'
-import Navigation from '../components/navigation'
-import Footer from '../components/footer'
-import Head from 'next/head'
-const inter = Inter({ subsets: ['latin'] })
+import Image from "next/image";
+import Landing from "../components/landing";
+import Navigation from "../components/navigation";
+import Head from "next/head";
+import Map from "../components/map";
 
 export default function Home() {
   return (
-   <>
-   <Head>
-        <title>Crisis Compass</title>
-        <meta name="description" content="Crisis Compass" />
-        <link rel="icon" href="/favicon.ico" />
+    <>
+      <Head>
+        <title>Map of Israel</title>
       </Head>
-    <Navigation/> 
-   <Landing/>
-   <Footer/>
-
-   </>
-  )
+      
+      <Navigation />
+      <h1 className="text-4xl py-28 flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+        Locate Shelter outside of War Zones
+      </h1>
+      <div className="h-screen">
+        <Map />
+      </div>
+    </>
+  );
 }
