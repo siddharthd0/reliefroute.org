@@ -13,37 +13,47 @@ export default function PressRelease() {
       <Navigation />
       <main className="container mx-auto mt-10 px-20 p-4 bg-white rounded-md">
         <h2 className="text-xl font-semibold mb-4">
-          Crisis Compass: Find resources in real-time in the Israel war
+          Crisis Compass: Real-time Aid in the Israel Conflict
         </h2>
         <p className="text-gray-600 mb-4">
-           In the face of escalating conflicts and the challenges
-          arising from areas affected by the ongoing situation in Israel, Crisis
-          Compass emerges as a beacon of hope. We aim to provide live updates
-          every 30 minutes on crucial resources such as shelter, food, and water
-          for individuals seeking refuge.
+          As conflicts escalate and challenges grow in Israel, Crisis Compass
+          stands as a beacon of hope and resilience. With live updates every 30
+          minutes on essential resources like shelter, food, and water, we aim
+          to be the sanctuary for those seeking refuge.
         </p>
 
+       
         <p className="text-gray-700 mb-4">
-          Crisis Compass recognizes the pressing need for reliable information
-          during tumultuous times. Our platform is designed to offer real-time
-          insights to those in desperate need, guiding them toward safety and
-          essential resources.
-        </p>
-
-        <p className="text-gray-700 mb-4">
-          Collaboration is key. We encourage organizations, volunteers, and
-          governmental bodies to share up-to-date data with us. This collective
-          effort ensures that Crisis Compass remains the most trusted source for
-          assistance during emergencies.
+          The mission of Crisis Compass transcends just being an information
+          portal. We believe in collaboration. Hence, we actively encourage
+          organizations, volunteers, and government entities to share real-time
+          data, enabling us to be the most trusted source of assistance during
+          emergencies.
         </p>
 
         <p className="text-gray-700 mb-4 italic">
-          About Crisis Compass: Born out of necessity, Crisis Compass dedicates
-          itself to assisting individuals during crises. Our real-time updates
-          bridge the information gap, ensuring that aid reaches where it's most
-          needed. In the midst of chaos, let Crisis Compass be your guiding
-          star.
+          About Crisis Compass: Spawned out of urgency, Crisis Compass is
+          devoted to helping individuals in crisis situations. Amidst the chaos,
+          allow Crisis Compass to be your guiding star.
         </p>
+        <div className="flex  my-8">
+          <div>
+            <img src="sid.png" alt="Siddharth Duggal" className="w-40 h-40 rounded-xl shadow-md"/>
+            <h3 className="text-center mt-2 text-lg font-medium">Siddharth Duggal</h3>
+          </div>
+          <div className="px-8">
+            <img src="adi.jpeg" alt="Aditya Sahasranam" className="w-40 h-40 rounded-xl shadow-md"/>
+            <h3 className="text-center mt-2 text-lg font-medium">Aditya Sahasranam</h3>
+          </div>
+        </div>
+        <p className="text-gray-700 mb-4">
+          Behind this initiative are two passionate teenagers, Siddharth Duggal
+          and Aditya Sahasranam. Motivated by a deep desire to provide support
+          and assistance during these testing times, they've built Crisis
+          Compass to bridge the information gap, ensuring aid reaches its most
+          needed destinations.
+        </p>
+
 
         <footer className="mt-6">
           <p className="text-gray-600">Press Contact:</p>
