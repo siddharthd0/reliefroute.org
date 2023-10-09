@@ -38,16 +38,16 @@ const NavLeft = ({ setIsOpen }) => {
         <FiMenu />
       </motion.button>
       <Logo />
-      <NavLink text="Find Help" />
-      <NavLink text="Give Help" />
+      <NavLink link="./give-help" text="Find Help" />
+      <NavLink link="./step-1" text="Give Help" />
     </div>
   );
 };
 
-const NavLink = ({ text }) => {
+const NavLink = ({ text,link }) => {
   return (
     <a
-      href="#"
+    href={link || "#"}
       rel="nofollow"
       className="hidden lg:block h-[30px] overflow-hidden font-medium"
     >
@@ -81,7 +81,7 @@ const NavMenu = ({ isOpen }) => {
       animate={isOpen ? "open" : "closed"}
       className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
-      <MenuLink text="Solutions" />
+      <MenuLink  text="Solutions" />
       <MenuLink text="Community" />
       <MenuLink text="Pricing" />
       <MenuLink text="Company" />
@@ -89,12 +89,12 @@ const NavMenu = ({ isOpen }) => {
   );
 };
 
-const MenuLink = ({ text }) => {
+const MenuLink = ({ text, link }) => {
   return (
     <motion.a
       variants={menuLinkVariants}
       rel="nofollow"
-      href="#"
+      href={link || "#"}
       className="h-[30px] overflow-hidden font-medium text-lg flex items-start gap-2"
     >
       <motion.span variants={menuLinkArrowVariants}>
