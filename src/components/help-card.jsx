@@ -35,8 +35,8 @@ const Example = () => {
 const ShimmerBorderCard = ({ IconComponent, title, description, link }) => {
   return (
     <Link href={link}>
-    <div className="w-72 group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg  p-0.5 transition-all duration-500 hover:scale-[1.01] hover:bg-slate-800/50">
-      <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] p-8 transition-colors duration-500 group-hover:bg-slate-800">
+    <div className="w-72 group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg  p-0.5 transition-all duration-500 hover:scale-[1.01] ">
+      <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] p-8 transition-colors duration-500 ">
         <IconComponent className="relative z-10 mb-10 mt-2 rounded-full border-2 border-indigo-500  p-4 text-7xl text-indigo-500" />
         <h4 className="relative z-10 mb-4 w-full text-3xl font-bold text-BLACK">
           {title}

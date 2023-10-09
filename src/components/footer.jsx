@@ -10,7 +10,9 @@ const Footer = () => {
         <span className="text-sm"> and </span>
         <a href="mailto:aditya@techoptimum.org" className="text-sm hover:underline">Aditya Sahasranam</a>
         </div>
+        <a href="/press">
         <button className="">Press Release</button>
+        </a>
       </div>
     </footer>
   );

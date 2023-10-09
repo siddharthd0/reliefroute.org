@@ -23,10 +23,7 @@ const FlipNav = () => {
 
 const Logo = () => {
   // Temp logo from https://logoipsum.com/
-  return (
-   <>
-   </>
-  );
+  return <></>;
 };
 
 const NavLeft = ({ setIsOpen }) => {
@@ -41,9 +38,8 @@ const NavLeft = ({ setIsOpen }) => {
         <FiMenu />
       </motion.button>
       <Logo />
-      <NavLink text="Find Help"/>
-        <NavLink text="Give Help"/>
-
+      <NavLink text="Find Help" />
+      <NavLink text="Give Help" />
     </div>
   );
 };
@@ -68,12 +64,11 @@ const NavLink = ({ text }) => {
 const NavRight = () => {
   return (
     <div className="flex items-center gap-4">
-  <motion.button
-  className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white"
-  >
-  Press Release
-</motion.button>
-
+        <a href="/press">
+      <motion.button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white">
+        Press Release
+      </motion.button>
+      </a>
     </div>
   );
 };
