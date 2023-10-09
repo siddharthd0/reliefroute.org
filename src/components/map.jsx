@@ -8,26 +8,26 @@ const MapComponent = () => {
   }, []);
 
   const initMap = () => {
-    const myLatLng = {
-      lat: 40.12150192260742,
-      lng: -100.45039367675781
+    const gazaStripLatLng = {
+      lat: 31.5,
+      lng: 34.4667
     };
     const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-      zoom: 4,
-      center: myLatLng,
+      zoom: 11,  // Adjusted zoom level for a better view of the Gaza Strip
+      center: gazaStripLatLng,
       fullscreenControl: false,
       zoomControl: true,
       streetViewControl: false
     });
     new window.google.maps.Marker({
-      position: myLatLng,
+      position: gazaStripLatLng,
       map,
-      title: "My location"
+      title: "Gaza Strip"
     });
   };
 
   return (
-    <div id="gmp-map" className="w-full h-full" />
+    <div id="gmp-map" className="w-500 h-full" />
   );
 };
 
