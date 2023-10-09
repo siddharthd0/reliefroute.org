@@ -10,10 +10,7 @@ export default function PressRelease() {
         <meta name="description" content="Press Release for Crisis Compass" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Navigation />
-
-      {/* Press Release Content */}
       <main className="container mx-auto mt-10 px-20 p-4 bg-white rounded-md">
         <h2 className="text-xl font-semibold mb-4">
           Crisis Compass: Find resources in real-time in the Israel war

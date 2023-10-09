@@ -4,7 +4,6 @@ import Landing from "../components/landing";
 import Navigation from "../components/navigation";
 import Head from "next/head";
 import Map from "../components/map";
-
 export default function Home() {
   return (
     <>
