@@ -19,6 +19,7 @@ function SafeHavenForm() {
     contactEmail: "",
     contactPhone: "",
     additionalInfo: "",
+    isVerified: "False",
   });
 
   const [scriptLoaded, setScriptLoaded] = useState(false);

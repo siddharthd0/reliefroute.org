@@ -68,6 +68,8 @@ const MapComponent = () => {
                 <p>Email: <a href="mailto:${geocodedLocation.contactEmail}">${geocodedLocation.contactEmail}</a></p>
                 <p>Phone: <a href="tel:${geocodedLocation.contactPhone}">${geocodedLocation.contactPhone}</a></p>
                 <p>${geocodedLocation.additionalInfo}</p>
+
+                
               </div>
             `,
           });
