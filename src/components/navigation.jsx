@@ -13,7 +13,7 @@ const FlipNavWrapper = () => {
 const FlipNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-white p-4 px-40 border-b-[1px] border-gray-200 flex items-center justify-between relative">
+    <nav className="px-4 bg-white p-4 md:p-6 border-b-[1px] border-gray-200 flex items-center justify-between relative">
       <NavLeft setIsOpen={setIsOpen} />
       <NavRight />
       <NavMenu isOpen={isOpen} />
@@ -21,23 +21,18 @@ const FlipNav = () => {
   );
 };
 
-const Logo = () => {
-  // Temp logo from https://logoipsum.com/
-  return <></>;
-};
-
 const NavLeft = ({ setIsOpen }) => {
   return (
-    <div className="flex items-center gap-6 ">
+    <div className="flex items-center gap-6">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="block lg:hidden text-gray-950 text-2xl"
+        className="text-gray-950 text-2xl md:hidden"
         onClick={() => setIsOpen((pv) => !pv)}
       >
         <FiMenu />
       </motion.button>
-      <NavLink link="./" text="Home"/>
+      <NavLink link="./" text="Home" />
       <NavLink link="./step-1" text="Find Help" />
       <NavLink link="./give-help" text="Give Help" />
     </div>
@@ -49,7 +44,7 @@ const NavLink = ({ text, link }) => {
     <a
       href={link || "#"}
       rel="nofollow"
-      className="hidden lg:block h-[30px] overflow-hidden font-medium"
+      className="hidden md:block h-[30px] overflow-hidden font-medium"
     >
       <motion.div whileHover={{ y: -30 }}>
         <span className="flex items-center h-[30px] text-gray-500">{text}</span>
@@ -79,9 +74,9 @@ const NavMenu = ({ isOpen }) => {
       variants={menuVariants}
       initial="closed"
       animate={isOpen ? "open" : "closed"}
-      className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
+      className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4 md:hidden"
     >
-      <MenuLink link="./" text="Home"/>
+      <MenuLink link="./" text="Home" />
       <MenuLink link="./step-1" text="Find Help" />
       <MenuLink link="./give-help" text="Give Help" />
     </motion.div>
