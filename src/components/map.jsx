@@ -20,7 +20,20 @@ const MapComponent = () => {
   }, []);
 
   useEffect(() => {
-    const initMap = () => {
+    const geocodeLocation = async (location) => {
+      const address = encodeURIComponent(location.address);
+      const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);
+      if (response.data.results && response.data.results.length > 0) {
+        const coords = response.data.results[0].geometry.location;
+        return { ...location, lat: coords.lat, lng: coords.lng };
+      } else {
+        return null;
+      }
+    };
+
+    const initMap = async () => {
+      if (!window.google) return;
+
       const centerOfIsrael = {
         lat: 31.046051,
         lng: 34.851612,
@@ -31,61 +44,61 @@ const MapComponent = () => {
         center: centerOfIsrael,
       });
 
-      locations.forEach((location) => {
-        const marker = new window.google.maps.Marker({
-          position: { lat: location.lat, lng: location.lng },
-          map,
-          title: location.businessName,
-        });
+      for (const location of locations) {
+        const geocodedLocation = await geocodeLocation(location);
+        if (geocodedLocation) {
+          const marker = new window.google.maps.Marker({
+            position: { lat: geocodedLocation.lat, lng: geocodedLocation.lng },
+            map,
+            title: geocodedLocation.businessName,
+          });
 
-        const infoWindow = new window.google.maps.InfoWindow({
-          content: `<div style="max-width: 200px">
-                      <h2>${location.businessName}</h2>
-                      <p>Type: ${location.type}</p>
-                      <p>Email: ${location.contactEmail}</p>
-                      <p>Phone: ${location.contactPhone}</p>
-                      <p>${location.additionalInfo}</p>
-                    </div>`,
-        });
+          const infoWindow = new window.google.maps.InfoWindow({
+            content: `
+              <div style="max-width: 200px">
+                <h2>${geocodedLocation.businessName}</h2>
+                <p>Type: ${geocodedLocation.type}</p>
+                <p>Email: <a href="mailto:${geocodedLocation.contactEmail}">${geocodedLocation.contactEmail}</a></p>
+                <p>Phone: <a href="tel:${geocodedLocation.contactPhone}">${geocodedLocation.contactPhone}</a></p>
+                <p>${geocodedLocation.additionalInfo}</p>
+              </div>
+            `,
+          });
 
-        marker.addListener('click', () => {
-          infoWindow.open(map, marker);
-        });
-      });
+          marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+          });
+        }
+      }
     };
 
-    if (locations.length > 0 && window.google) {
+    if (locations.length > 0) {
       initMap();
-    } else if (!window.google) {
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`;
-      script.onload = initMap;
-      document.body.appendChild(script);
     }
   }, [locations]);
 
   return (
     <>
-      <div>
+      <div className="flex flex-col items-center">
         <input 
           type="text" 
           placeholder="Filter by name" 
           value={filter} 
           onChange={e => setFilter(e.target.value)} 
-          style={{margin: '10px 0'}}
+          className="mt-4 mb-6 p-2 border border-gray-300 rounded focus:outline-none focus:border-black"
         />
         {locations.filter(loc => loc.businessName.toLowerCase().includes(filter.toLowerCase())).map((location) => (
-          <div key={location._id} style={{ maxWidth: '200px', margin: '10px 0', border: '1px solid #ccc', padding: '10px' }}>
-            <h2>{location.businessName}</h2>
-            <p>Type: {location.type}</p>
-            <p>Email: {location.contactEmail}</p>
-            <p>Phone: {location.contactPhone}</p>
-            <p>{location.additionalInfo}</p>
+          <div key={location._id} className="bg-white max-w-sm w-full p-6 m-4 rounded shadow-lg">
+            <h2 className="text-xl font-bold mb-2">{location.businessName}</h2>
+            <p><span className="font-bold">Type:</span> {location.type}</p>
+            <p><span className="font-bold">Address:</span> <a href={`https://www.google.com/maps/search/?api=1&query=${location.address}`} target="_blank" rel="noopener noreferrer" className="text-blue-600">{location.address}</a></p>
+            <p><span className="font-bold">Email:</span> <a href={`mailto:${location.contactEmail}`} className="text-blue-600">{location.contactEmail}</a></p>
+            <p><span className="font-bold">Phone:</span> <a href={`tel:${location.contactPhone}`} className="text-blue-600">{location.contactPhone}</a></p>
+            <p><span className="font-bold">Additional Information: </span>{location.additionalInfo}</p>
           </div>
         ))}
       </div>
-      <div ref={mapRef} style={{ width: '100%', height: '500px' }} />
+      <div ref={mapRef} className="w-full h-96 mt-8" />
     </>
   );
 };
