@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const data = req.body;
 
-    const client = await MongoClient.connect(process.env.MONGODB_URI);
+    const client = await MongoClient.connect(process.env.MONGODB);
     const db = client.db();
 
     const safeHavenCollection = db.collection('safeHavens');

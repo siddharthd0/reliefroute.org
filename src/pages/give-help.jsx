@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Navigation from '../components/navigation';
 import Footer from '../components/footer';
 
-export default function SafeHavenForm() {
+function SafeHavenForm() {
     const [formData, setFormData] = useState({
         businessName: '',
         type: '',
@@ -13,44 +13,50 @@ export default function SafeHavenForm() {
         additionalInfo: ''
     });
 
+    const [scriptLoaded, setScriptLoaded] = useState(false);
     const addressInputRef = useRef(null);
 
     useEffect(() => {
-        // Function to initialize the autocomplete
-        const initializeAutocomplete = () => {
-            const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
-                types: ['address'],
-                componentRestrictions: { country: 'il' } // Restrict to Israel addresses
-            });
+        // Function to load the Google Maps API script
+        const loadGoogleMapsScript = () => {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+            script.async = true;
+            script.defer = true;  // Add this line to defer the loading of the script
+            script.onload = () => {
+                setScriptLoaded(true);
+            };
+            document.body.appendChild(script);
+        };
 
-            autocomplete.addListener('place_changed', () => {
-                const place = autocomplete.getPlace();
+        // Load the script
+        if (!window.google) {
+            loadGoogleMapsScript();
+        } else {
+            setScriptLoaded(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!scriptLoaded || !window.google || !window.google.maps || !window.google.maps.places) return;
+    
+        const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+            types: ['address'],
+            componentRestrictions: { country: 'il' }
+        });
+    
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            if (place && place.formatted_address) {
                 setFormData(prevState => ({
                     ...prevState,
                     address: place.formatted_address
                 }));
-            });
-        };
-
-        if (window.google && window.google.maps && window.google.maps.places) {
-            initializeAutocomplete();
-        } else {
-            const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
-            script.async = true;
-            script.defer = true;
-            script.addEventListener('load', () => {
-                initializeAutocomplete();
-            });
-            document.body.appendChild(script);
-        }
-
-        return () => {
-            if (window.google && window.google.maps && window.google.maps.event) {
-                window.google.maps.event.clearInstanceListeners(addressInputRef.current);
             }
-        };
-    }, []);
+        });
+    
+    }, [scriptLoaded]);
+    
 
     const handleChange = (e) => {
         setFormData({
@@ -68,6 +74,8 @@ export default function SafeHavenForm() {
             alert('Error submitting the form. Please try again.');
         }
     };
+
+
     return (
         <>
         <Navigation/>
@@ -101,7 +109,6 @@ export default function SafeHavenForm() {
                         <option value="restaurant">Restaurant</option>
                         <option value="gas_station">Gas Station</option>
                         <option value="hotel">Hotel</option>
-                        {/* Add other types as needed */}
                     </select>
                 </div>
 
@@ -117,6 +124,7 @@ export default function SafeHavenForm() {
                         className="mt-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                     />
                 </div>
+
                 <div>
                     <label htmlFor="contactEmail" className="block text-sm font-medium leading-6 text-gray-900">Contact Email</label>
                     <input 
@@ -162,3 +170,5 @@ export default function SafeHavenForm() {
         </>
     );
 }
+
+export default SafeHavenForm;
