@@ -37,7 +37,7 @@ const NavLeft = ({ setIsOpen }) => {
       >
         <FiMenu />
       </motion.button>
-      <NavLink link="./home" text="Home"/>
+      <NavLink link="./" text="Home"/>
       <NavLink link="./step-1" text="Find Help" />
       <NavLink link="./give-help" text="Give Help" />
     </div>
@@ -81,7 +81,7 @@ const NavMenu = ({ isOpen }) => {
       animate={isOpen ? "open" : "closed"}
       className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
-      <MenuLink link="./home" text="Home"/>
+      <MenuLink link="./" text="Home"/>
       <MenuLink link="./step-1" text="Find Help" />
       <MenuLink link="./give-help" text="Give Help" />
     </motion.div>
