@@ -8,9 +8,11 @@ import Map  from '../components/map';
 export default function Shelter() {
   return (
     <>
-      <Head>
-        <title>Map of Israel</title>
-      </Head>
+     <Head>
+  <title>Map of Israel</title>
+  <script async defer src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}></script>
+</Head>
+
 
       <Navigation />
       <h1 className="text-4xl py-28 flex flex-col items-center justify-center w-full flex-1 px-20 text-center">

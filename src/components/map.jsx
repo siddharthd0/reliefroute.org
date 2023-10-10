@@ -4,7 +4,14 @@ import axios from 'axios';
 const MapComponent = () => {
   const mapRef = useRef(null);
   const [locations, setLocations] = useState([]);
-  const [filter, setFilter] = useState(''); // For filtering locations by name
+  const [filter, setFilter] = useState('');
+  const [mapsLoaded, setMapsLoaded] = useState(false);
+
+    useEffect(() => {
+        window.onload = () => {
+            setMapsLoaded(true);
+        };
+    }, []);
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -75,6 +82,9 @@ const MapComponent = () => {
     if (locations.length > 0) {
       initMap();
     }
+    if (mapsLoaded) {
+      initMap();
+  }
   }, [locations]);
 
   return (
