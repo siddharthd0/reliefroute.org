@@ -2,7 +2,11 @@ import Image from "next/image";
 import Landing from "../components/landing";
 import Navigation from "../components/navigation";
 import Head from "next/head";
-import Map from "../components/map";
+import dynamic from 'next/dynamic';
+const DynamicMapComponent = dynamic(() => import('../components/map'), {
+  ssr: false, 
+  loading: () => <p>Loading...</p> 
+});
 
 export default function Shelter() {
   return (
@@ -16,7 +20,7 @@ export default function Shelter() {
         Locate Shelter outside of War Zones
       </h1>
       <div className="h-screen">
-        <Map />
+        <DynamicMapComponent />
         <h1>test</h1>
       </div>
     </>
