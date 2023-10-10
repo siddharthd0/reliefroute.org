@@ -1,7 +1,8 @@
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
 import Navigation from '../components/navigation';
 import Footer from '../components/footer';
+
 export default function SafeHavenForm() {
     const [formData, setFormData] = useState({
         businessName: '',
@@ -11,6 +12,45 @@ export default function SafeHavenForm() {
         contactPhone: '',
         additionalInfo: ''
     });
+
+    const addressInputRef = useRef(null);
+
+    useEffect(() => {
+        // Function to initialize the autocomplete
+        const initializeAutocomplete = () => {
+            const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+                types: ['address'],
+                componentRestrictions: { country: 'il' } // Restrict to Israel addresses
+            });
+
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                setFormData(prevState => ({
+                    ...prevState,
+                    address: place.formatted_address
+                }));
+            });
+        };
+
+        if (window.google && window.google.maps && window.google.maps.places) {
+            initializeAutocomplete();
+        } else {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+            script.async = true;
+            script.defer = true;
+            script.addEventListener('load', () => {
+                initializeAutocomplete();
+            });
+            document.body.appendChild(script);
+        }
+
+        return () => {
+            if (window.google && window.google.maps && window.google.maps.event) {
+                window.google.maps.event.clearInstanceListeners(addressInputRef.current);
+            }
+        };
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -22,14 +62,12 @@ export default function SafeHavenForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const webhookURL = proceses.env.DISCORD;
-            await axios.post(webhookURL, { content: JSON.stringify(formData) });
+            await axios.post('/api/safeHaven', formData);
             alert('Form submitted successfully!');
         } catch (error) {
             alert('Error submitting the form. Please try again.');
         }
     };
-
     return (
         <>
         <Navigation/>
@@ -70,6 +108,7 @@ export default function SafeHavenForm() {
                 <div>
                     <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">Address</label>
                     <input 
+                        ref={addressInputRef}
                         type="text" 
                         id="address" 
                         name="address"
@@ -78,7 +117,6 @@ export default function SafeHavenForm() {
                         className="mt-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                     />
                 </div>
-
                 <div>
                     <label htmlFor="contactEmail" className="block text-sm font-medium leading-6 text-gray-900">Contact Email</label>
                     <input 
