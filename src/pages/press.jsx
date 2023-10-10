@@ -16,7 +16,7 @@ export default function PressRelease() {
           Crisis Compass: Real-time Aid in the Israel Conflict
         </h2>
         <p className="text-gray-600 mb-4">
-          As conflicts escalate and challenges grow in Israel, Crisis Compass
+          As conflicts escalate and challenges grow in Israel, No Crisis 
           stands as a beacon of hope and resilience. With live updates every 30
           minutes on essential resources like shelter, food, and water, we aim
           to be the sanctuary for those seeking refuge.
@@ -25,16 +25,13 @@ export default function PressRelease() {
        
         <p className="text-gray-700 mb-4">
           The mission of Crisis Compass transcends just being an information
-          portal. We believe in collaboration. Hence, we actively encourage
-          organizations, volunteers, and government entities to share real-time
-          data, enabling us to be the most trusted source of assistance during
-          emergencies.
+          portal. We need help from locals in Israel to help crowdsource our database to provide more resources
+          for impacted citizens.
+
         </p>
 
         <p className="text-gray-700 mb-4 italic">
-          About Crisis Compass: Spawned out of urgency, Crisis Compass is
-          devoted to helping individuals in crisis situations. Amidst the chaos,
-          allow Crisis Compass to be your guiding star.
+          About: Spawned out of urgency, we made this website to help the people impacted by the war find proper resources, like food, water, and shelter, basic essentials.
         </p>
         <div className="flex  my-8">
           <div>
@@ -47,11 +44,9 @@ export default function PressRelease() {
           </div>
         </div>
         <p className="text-gray-700 mb-4">
-          Behind this initiative are two passionate teenagers, Siddharth Duggal
-          and Aditya Sahasranam. Motivated by a deep desire to provide support
-          and assistance during these testing times, they've built Crisis
-          Compass to bridge the information gap, ensuring aid reaches its most
-          needed destinations.
+          Behind this initiative are two passionate teenagers, Siddharth Duggal (17)
+          and Aditya Sahasranam (15). Motivated by a deep desire to provide support
+          and assistance during these times.
         </p>
 
 

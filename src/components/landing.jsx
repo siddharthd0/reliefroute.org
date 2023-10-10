@@ -1,23 +1,24 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link"
 const ShuffleHero = () => {
   return (
     <section className="w-full px-4 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
       <div>
-        <span className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium">
-         
-        </span>
+        <span className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium"></span>
         <h3 className="text-4xl md:text-6xl font-semibold">
           Helping the Israel & Hamas War
         </h3>
         <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
-          Shelters, food and water, and other resources are needed to help people surive.
+          Shelters, food and water, and other resources are needed to help
+          people surive.
         </p>
+        <Link href="/step-1">
         <button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white">
-  Locate Resources
-</button>
-
+          Locate Resources
+        </button>
+        </Link>
       </div>
       <ShuffleGrid />
     </section>
@@ -140,8 +141,17 @@ const ShuffleGrid = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 relative"> {/* Added 'relative' */}
-      <Image className="rounded-md" src="/war.jpg" layout="fill" objectFit="cover" alt="War Image" /> {/* Modified Image component */}
+    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 relative">
+      {" "}
+      {/* Added 'relative' */}
+      <Image
+        className="rounded-md"
+        src="/war.jpg"
+        layout="fill"
+        objectFit="cover"
+        alt="War Image"
+      />{" "}
+      {/* Modified Image component */}
     </div>
   );
 };

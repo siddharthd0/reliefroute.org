@@ -37,17 +37,16 @@ const NavLeft = ({ setIsOpen }) => {
       >
         <FiMenu />
       </motion.button>
-      <Logo />
-      <NavLink link="./give-help" text="Find Help" />
-      <NavLink link="./step-1" text="Give Help" />
+      <NavLink link="./step-1" text="Find Help" />
+      <NavLink link="./give-help" text="Give Help" />
     </div>
   );
 };
 
-const NavLink = ({ text,link }) => {
+const NavLink = ({ text, link }) => {
   return (
     <a
-    href={link || "#"}
+      href={link || "#"}
       rel="nofollow"
       className="hidden lg:block h-[30px] overflow-hidden font-medium"
     >
@@ -64,10 +63,10 @@ const NavLink = ({ text,link }) => {
 const NavRight = () => {
   return (
     <div className="flex items-center gap-4">
-        <a href="/press">
-      <motion.button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white">
-        Press Release
-      </motion.button>
+      <a href="/press">
+        <motion.button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white">
+          Press Release
+        </motion.button>
       </a>
     </div>
   );
@@ -81,7 +80,7 @@ const NavMenu = ({ isOpen }) => {
       animate={isOpen ? "open" : "closed"}
       className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
-      <MenuLink  text="Solutions" />
+      <MenuLink text="Solutions" />
       <MenuLink text="Community" />
       <MenuLink text="Pricing" />
       <MenuLink text="Company" />
