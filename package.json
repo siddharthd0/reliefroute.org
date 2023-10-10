@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
+    "@vercel/analytics": "^1.1.0",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "mongodb": "^6.1.0",
