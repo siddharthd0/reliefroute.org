@@ -28,7 +28,6 @@ export default function Shelter() {
         </ErrorBoundary>
       </div>
       <div className="mt-28"></div>
-      <Footer />
     </>
   );
 }

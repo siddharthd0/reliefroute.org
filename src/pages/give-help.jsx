@@ -14,7 +14,7 @@ function SafeHavenForm() {
 
   const [formData, setFormData] = useState({
     businessName: "",
-    type: "",
+    tags: [],
     address: "",
     contactEmail: "",
     contactPhone: "",
@@ -23,6 +23,7 @@ function SafeHavenForm() {
   });
 
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [tagInput, setTagInput] = useState('');
   const addressInputRef = useRef(null);
 
   useEffect(() => {
@@ -99,11 +100,34 @@ function SafeHavenForm() {
     if (isFormValid()) {
         try {
             await axios.post("/api/safeHaven", formData);
-            setNotifications((pv) => [{ id: Math.random(), text: 'Request to have your Safe Haven added.' }, ...pv]);
+            setNotifications((pv) => [{ id: Math.random(), text: `You're safe place has been added to the help page.` }, ...pv]);
         } catch (error) {
             setNotifications((pv) => [{ id: Math.random(), text: 'Error submitting the request. Please email siddharth@techoptimum.org.' }, ...pv]);
         }
     }
+};
+const handleAddTag = () => {
+  if (tagInput && !formData.tags.includes(tagInput)) {
+    setFormData(prevState => ({
+      ...prevState,
+      tags: [...prevState.tags, tagInput],
+    }));
+    setTagInput('');  // Clear the input
+  }
+};
+
+const handleRemoveTag = (tag) => {
+  setFormData(prevState => ({
+    ...prevState,
+    tags: prevState.tags.filter(t => t !== tag),
+  }));
+};
+
+const handleTagInputKeyPress = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();  // Prevent form submission
+    handleAddTag();
+  }
 };
 
   return (
@@ -123,17 +147,18 @@ function SafeHavenForm() {
 
           {/* Iterate over form fields to reduce redundancy */}
           {[
-            { label: "Business Name", id: "businessName", type: "text" },
-            { label: "Type of Establishment", id: "type", type: "text" },
+            { label: "Business Name", id: "businessName", type: "text" , placeholder:"Enter your business name"},
+            
             {
               label: "Address",
               id: "address",
               type: "text",
               ref: addressInputRef,
+              placeholder:"Enter your address"
             },
-            { label: "Contact Email", id: "contactEmail", type: "email" },
-            { label: "Contact Phone", id: "contactPhone", type: "tel" },
-          ].map(({ label, id, type, ref }) => (
+            { label: "Contact Email", id: "contactEmail", type: "email", placeholder:"Enter your email" },
+            { label: "Contact Phone", id: "contactPhone", type: "tel", placeholder:"Enter your phone number" },
+          ].map(({ label, id, type, ref, placeholder }) => (
             <div  key={id}>
               <label
                 htmlFor={id}
@@ -142,6 +167,7 @@ function SafeHavenForm() {
                 {label}
               </label>
               <input
+              placeholder={placeholder}
                 type={type}
                 id={id}
                 name={id}
@@ -152,6 +178,44 @@ function SafeHavenForm() {
               />
             </div>
           ))}
+            <div className="mb-6">
+            <label htmlFor="tags" className="block text-sm font-medium leading-6 text-gray-900">
+              Tags
+            </label>
+            <div className="flex mt-2">
+              <input
+                type="text"
+                id="tagInput"
+                placeholder="Input tags like 'Food', 'Shelter', 'Medical', etc."
+                name="tagInput"
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyPress={handleTagInputKeyPress}
+                className="transition duration-300 p-2 border border-gray-100 rounded focus:outline-none focus:border-black flex-grow"
+              />
+              <button
+                type="button"
+                onClick={handleAddTag}
+                className="ml-2 px-4 py-2 font-medium bg-blue-500 text-white rounded"
+              >
+                Add
+              </button>
+            </div>
+            <div className="flex flex-wrap mt-2">
+              {formData.tags.map(tag => (
+                <div key={tag} className="tag-item mr-2 mb-2 bg-blue-500 text-white rounded px-2 py-1 flex items-center">
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveTag(tag)}
+                    className="ml-2 text-sm text-red-500"
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div>
             <label
@@ -161,6 +225,7 @@ function SafeHavenForm() {
               Additional Information
             </label>
             <textarea
+            placeholder="Enter any additional information you would like to provide to people who you would like to help."
               id="additionalInfo"
               name="additionalInfo"
               rows={3}

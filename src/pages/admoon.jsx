@@ -83,9 +83,18 @@ const AdminLogin = () => {
                           {location.businessName}
                         </h2>
                         <p>
-                          <span className="font-bold">Type:</span>{" "}
-                          {location.type}
-                        </p>
+                   
+                   {location.tags
+                     ? location.tags.map((tag) => (
+                         <span
+                           className="inline-block bg-blue-500 text-white rounded-full px-2 py-1 text-xs font-bold mr-3"
+                           key={tag}
+                         >
+                           {tag}
+                         </span>
+                       ))
+                     : "N/A"}
+                 </p>
                         <p>
                           <span className="font-bold">Address:</span>{" "}
                           <a
