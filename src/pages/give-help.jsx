@@ -4,8 +4,10 @@ import Navigation from "../components/navigation";
 import Footer from "../components/footer";
 import { AnimatePresence, motion } from "framer-motion"
 import { FiCheckSquare, FiX} from "react-icons/fi"
+import {useRouter} from "next/router";
  
 function SafeHavenForm() {
+  const router = useRouter();
   const [notifications, setNotifications] = useState([]);
   
   const removeNotification = (id) => {
@@ -99,7 +101,8 @@ function SafeHavenForm() {
     if (isFormValid()) {
         try {
             await axios.post("/api/safeHaven", formData);
-            setNotifications((pv) => [{ id: Math.random(), text: `You're safe place has been added to the help page.` }, ...pv]);
+            setNotifications((pv) => [{ id: Math.random(), text: `You're safe place has been added to the 'Find Help' page.` }, ...pv]);
+            router.push('/shelter');
         } catch (error) {
             setNotifications((pv) => [{ id: Math.random(), text: 'Error submitting the request. Please email siddharth@techoptimum.org.' }, ...pv]);
         }
