@@ -60,7 +60,6 @@ function SafeHavenForm() {
       addressInputRef.current,
       {
         types: ["address"],
-        componentRestrictions: { country: "il" },
       }
     );
 
@@ -137,12 +136,11 @@ const handleTagInputKeyPress = (event) => {
 
       <form onSubmit={handleSubmit} className="py-8 bg-gray-100 px-4 md:px-36 space-y-8">
         <div className="space-y-2">
-          <h2 className="text-4xl text-center font-semibold text-gray-900 py-2">
+          <h2 className="text-4xl text-center font-semibold text-gray-900 py-4">
             Provide a Safe Haven
           </h2>
           <p className="text-sm text-gray-600 text-center md:text-left">
-            Thank you for offering your establishment as a safe place in this
-            unfortunate war. Please provide the details below:
+            Thank you for helping people impacted by the war.
           </p>
 
           {/* Iterate over form fields to reduce redundancy */}
