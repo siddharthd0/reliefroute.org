@@ -21,30 +21,30 @@ const MapComponent = () => {
       try {
         const response = await axios.get("/api/safeHaven");
         setLocations(response.data);
-        setLoading(false);  // Set loading to false when data is fetched
+        setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching locations:", error);
-        setLoading(false);  // Set loading to false if there's an error
+        setLoading(false); // Set loading to false if there's an error
       }
     };
 
     fetchLocations();
   }, []);
 
-  useEffect(() => {
-    const geocodeLocation = async (location) => {
-      const address = encodeURIComponent(location.address);
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
-      );
-      if (response.data.results && response.data.results.length > 0) {
-        const coords = response.data.results[0].geometry.location;
-        return { ...location, lat: coords.lat, lng: coords.lng };
-      } else {
-        return null;
-      }
-    };
+  const geocodeLocation = async (location) => {
+    const address = encodeURIComponent(location.address);
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+    );
+    if (response.data.results && response.data.results.length > 0) {
+      const coords = response.data.results[0].geometry.location;
+      return { ...location, lat: coords.lat, lng: coords.lng };
+    } else {
+      return null;
+    }
+  };
 
+  useEffect(() => {
     const initMap = async () => {
       if (!window.google) return;
 
@@ -53,17 +53,19 @@ const MapComponent = () => {
         lng: 34.851612,
       };
 
-      const map = new window.google.maps.Map(mapRef.current, {
+      const mapInstance = new window.google.maps.Map(mapRef.current, {
         zoom: 7,
         center: centerOfIsrael,
       });
+
+      mapRef.current = mapInstance;  // Store the map instance in the ref
 
       for (const location of locations) {
         const geocodedLocation = await geocodeLocation(location);
         if (geocodedLocation) {
           const marker = new window.google.maps.Marker({
             position: { lat: geocodedLocation.lat, lng: geocodedLocation.lng },
-            map,
+            map: mapInstance,
             title: geocodedLocation.businessName,
           });
           const infoWindow = new window.google.maps.InfoWindow({
@@ -80,7 +82,7 @@ const MapComponent = () => {
           });
 
           marker.addListener("click", () => {
-            infoWindow.open(map, marker);
+            infoWindow.open(mapInstance, marker);
           });
         }
       }
@@ -105,15 +107,23 @@ const MapComponent = () => {
     </motion.div>
   );
 
+  const handleLocateOnMap = (lat, lng) => {
+    if (mapRef.current) {
+      const location = new window.google.maps.LatLng(lat, lng);
+      mapRef.current.panTo(location);
+      mapRef.current.setZoom(15);  // Set zoom level to 15 (or any desired level)
+    }
+  };
+
   return (
     <>
-     <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <input
           type="text"
           placeholder="Filter by name"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="mt-4 mb-6 p-2 border border-gray-300 rounded focus:outline-none focus:border-black"
+          className="mb-6 p-2 border border-gray-300 rounded focus:outline-none focus:border-black"
         />
         {loading ? (
           <div className="spinner">
@@ -136,10 +146,10 @@ const MapComponent = () => {
                       {location.businessName}
                     </h2>
                     <p>
-                      <span className="font-bold">Type:</span> {location.type}
+                      <span className="font-bold">Type: </span> {location.type}
                     </p>
                     <p>
-                      <span className="font-bold">Address:</span>
+                      <span className="font-bold">Address: </span>
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${location.address}`}
                         target="_blank"
@@ -150,7 +160,7 @@ const MapComponent = () => {
                       </a>
                     </p>
                     <p>
-                      <span className="font-bold">Email:</span>
+                      <span className="font-bold">Email: </span>
                       <a
                         href={`mailto:${location.contactEmail}`}
                         className="text-blue-600"
@@ -159,7 +169,7 @@ const MapComponent = () => {
                       </a>
                     </p>
                     <p>
-                      <span className="font-bold">Phone:</span>
+                      <span className="font-bold">Phone: </span>
                       <a
                         href={`tel:${location.contactPhone}`}
                         className="text-blue-600"
@@ -168,18 +178,32 @@ const MapComponent = () => {
                       </a>
                     </p>
                     <p>
-                      <span className="font-bold">Additional Information: </span>
+                      <span className="mb-4 font-bold">
+                        Additional Information:{" "}
+                      </span>
                       {location.additionalInfo}
                     </p>
+                    <div className="mt-4">
+                    <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${location.address}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-2 font-medium bg-blue-500 text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+                      >
+                        Locate on Google Maps
+                      </a>
+                      </div>
                   </div>
                   {location.isVerified === "True" && (
-                    <div className="relative ml-4">
+                    <div
+                      onMouseEnter={() => setHovered(true)}
+                      onMouseLeave={() => setHovered(false)}
+                      className="relative pl-4"
+                    >
                       <img
                         src="/check.png"
                         alt="Verified Icon"
-                        className="w-24"
-                        onMouseEnter={() => setHovered(true)}
-                        onMouseLeave={() => setHovered(false)}
+                        className="w-18"
                       />
                       {hovered && <Tooltip />}
                     </div>
