@@ -13,7 +13,7 @@ const FlipNavWrapper = () => {
 const FlipNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav role="navigation" className="px-4 sm:px-10 md:px-20 lg:px-52 py-4 bg-white border-b border-gray-200 flex items-center justify-between relative">
+    <nav role="navigation" className="px-4 sm:px-10 md:px-20 lg:px-40 py-4 bg-white border-b border-gray-200 flex items-center justify-between relative">
 
       <NavLeft setIsOpen={setIsOpen} />
       <NavRight />
