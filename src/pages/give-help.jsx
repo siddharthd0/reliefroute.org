@@ -111,12 +111,12 @@ function SafeHavenForm() {
       <Navigation />
       <SlideInNotifications notifications={notifications} setNotifications={setNotifications} />
 
-      <form onSubmit={handleSubmit} className="py-8 px-4 md:px-36 space-y-8">
-        <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="py-8 bg-gray-100 px-4 md:px-36 space-y-8">
+        <div className="space-y-2">
           <h2 className="text-4xl text-center font-semibold text-gray-900 py-2">
             Provide a Safe Haven
           </h2>
-          <p className="text-sm leading-6 text-gray-600 text-center md:text-left">
+          <p className="text-sm text-gray-600 text-center md:text-left">
             Thank you for offering your establishment as a safe place in this
             unfortunate war. Please provide the details below:
           </p>
@@ -134,7 +134,7 @@ function SafeHavenForm() {
             { label: "Contact Email", id: "contactEmail", type: "email" },
             { label: "Contact Phone", id: "contactPhone", type: "tel" },
           ].map(({ label, id, type, ref }) => (
-            <div key={id}>
+            <div  key={id}>
               <label
                 htmlFor={id}
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -148,7 +148,7 @@ function SafeHavenForm() {
                 ref={ref}
                 value={formData[id]}
                 onChange={handleChange}
-                className="mt-4 mb-6 p-2 border border-gray-300 rounded focus:outline-none focus:border-black w-full"
+                className="transition duration-300 mt-4 mb-6 p-2 border border-gray-100 rounded focus:outline-none focus:border-black w-full"
               />
             </div>
           ))}
