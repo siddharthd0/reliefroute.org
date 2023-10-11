@@ -143,15 +143,17 @@ const ShuffleGrid = () => {
   return (
     <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 relative">
       {" "}
-      {/* Added 'relative' */}
       <Image
         className="rounded-md"
-        src="/war.jpg"
+        src="/1715810722.0.jpg"
         layout="fill"
         objectFit="cover"
         alt="War Image"
-      />{" "}
-      {/* Modified Image component */}
+      />
+      <p className="">
+      Sameh Rahmi/NurPhoto via Getty Images
+      </p>
+      
     </div>
   );
 };

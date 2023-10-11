@@ -11,7 +11,8 @@ export default function PressRelease() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation />
-      <main className="container mx-auto mt-10 px-20 p-4 bg-white rounded-md">
+      <main className="container mx-auto mt-10 p-6 sm:px-8 md:px-20 bg-white rounded-md">
+
         <h2 className="text-xl font-semibold mb-4">
           Crisis Compass: Real-time Aid in the Israel Conflict
         </h2>

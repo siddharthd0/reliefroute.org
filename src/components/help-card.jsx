@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const Example = () => {
   return (
-    <div className="flex justify-center items-center space-x-6 px-4 py-12">
+    <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center space-x-0 sm:space-x-6 space-y-6 sm:space-y-0 px-4 py-12">
       <ShimmerBorderCard 
         IconComponent={BsFillHouseDoorFill}
         title="Shelter" 
@@ -31,6 +31,7 @@ const Example = () => {
     </div>
   );
 };
+
 
 const ShimmerBorderCard = ({ IconComponent, title, description, link }) => {
   return (

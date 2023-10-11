@@ -8,9 +8,9 @@ export default function StepOne() {
   return (
     <>
       <Navigation />
-      <div className="flex flex-col items-center justify-center min-h-screen ">
-        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-          <h1 className="text-6xl font-bold">Select what you need</h1>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <main className="flex flex-col items-center justify-center w-full flex-1 px-4 sm:px-20 text-center">
+          <h1 className="pt-8 text-4xl sm:text-xl font-bold">Select what you need</h1>
           <HelpCard />
         </main>
       </div>
@@ -18,4 +18,3 @@ export default function StepOne() {
     </>
   );
 }
-
