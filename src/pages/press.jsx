@@ -61,7 +61,7 @@ export default function PressRelease() {
           <p className="text-gray-700">Siddharth Duggal</p>
           <p>
             <a
-              href="mailto:siddharthduggal2013@gmail.com"
+              href="mailto:siddharth@techoptimum.org"
               className="text-blue-500 hover:underline"
             >
               siddharth@techoptimum.org
