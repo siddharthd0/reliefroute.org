@@ -12,7 +12,7 @@ const ShuffleHero = () => {
         </h3>
         <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
           Shelters, food and water, and other resources are needed to help
-          people surive.
+          people survive.
         </p>
         <Link href="/step-1">
         <button className="px-4 py-2 text-black border border-solid border-black font-medium rounded-md whitespace-nowrap transition-colors duration-300 hover:bg-black hover:text-white">
