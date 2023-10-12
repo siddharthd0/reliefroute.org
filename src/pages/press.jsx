@@ -64,13 +64,10 @@ export default function PressRelease() {
               href="mailto:siddharthduggal2013@gmail.com"
               className="text-blue-500 hover:underline"
             >
-              siddharthduggal2013@gmail.com
+              siddharth@techoptimum.org
             </a>
           </p>
-          <p className="text-gray-700">Phone: (208) 810-8585</p>
-          <p className="text-gray-700">
-            Address: 1350 S Five Mile Road, Unit #1906767
-          </p>
+       
         </footer>
       </main>
 
