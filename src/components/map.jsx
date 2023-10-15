@@ -179,10 +179,7 @@ const MapComponent = () => {
         </div>
         
         {loading ? (
-          <div className="spinner">
-            <div className="double-bounce1"></div>
-            <div className="double-bounce2"></div>
-          </div>
+          <div className="pt-4 text-2xl text-gray-700 font-bold text-center">Loading Resources & Map...</div>
         ) : (
           <div className="flex flex-wrap justify-center">
 
